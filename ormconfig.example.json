@@ -1,0 +1,11 @@
+{
+  "type": "mongodb",
+  "url": "<MongoDBAtlasConnectionString>",
+  "useNewUrlParser": true,
+  "synchronize": true,
+  "logging": true,
+  "entities": [],
+  "useUnifiedTopology": true,
+  "port": 3000
+}
+
