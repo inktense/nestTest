@@ -1,40 +1,46 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, CreateDateColumn, UpdateDateColumn, ObjectID, ObjectIdColumn } from 'typeorm';
 import { IsEmail, IsEmpty, IsString, IsDate, IsNumber } from 'class-validator';
 
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @ObjectIdColumn({ name: '_id' })
+  public id: ObjectID;
+
+  @CreateDateColumn()
+  public createdAt: Date;
+
+  @UpdateDateColumn()
+  public updatedAt: Date;
 
   @Column({ length: 150 })
   @IsEmpty()
   @IsString()
-  firstName: string;
+  public firstName: string;
 
   @Column({ length: 150 })
   @IsEmpty()
   @IsString()
-  lastName: string;
+  public lastName: string;
 
   @Column({ length: 100 })
   @IsEmpty()
   @IsEmail()
-  email: string;
+  public email: string;
 
   @Column()
   @IsEmpty()
   @IsDate()
-  birthDate: Date;
+  public birthDate: Date;
 
   @Column()
   @IsString()
-  language: string;
+  public language: string;
 
   @Column({ length: 11 })
   @IsNumber()
-  phone: number;
+  public phone: number;
 
   @Column()
   @IsNumber()
-  zipCode: number;
+  public zipCode: number;
 }
