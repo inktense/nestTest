@@ -1,5 +1,9 @@
 import { Entity, Column, CreateDateColumn, UpdateDateColumn, ObjectID, ObjectIdColumn } from 'typeorm';
-import { IsEmail, IsEmpty, IsString, IsDate, IsNumber } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString, IsDate, IsNumber, IsOptional } from 'class-validator';
+
+export enum language {
+  ENGB = 'en-gb',
+}
 
 @Entity()
 export class User {
@@ -13,34 +17,41 @@ export class User {
   public updatedAt: Date;
 
   @Column({ length: 150 })
-  @IsEmpty()
+  @IsNotEmpty()
   @IsString()
   public firstName: string;
 
   @Column({ length: 150 })
-  @IsEmpty()
+  @IsNotEmpty()
   @IsString()
   public lastName: string;
 
   @Column({ length: 100 })
-  @IsEmpty()
+  @IsNotEmpty()
   @IsEmail()
   public email: string;
 
   @Column()
-  @IsEmpty()
+  @IsOptional()
   @IsDate()
   public birthDate: Date;
 
-  @Column()
+  @Column({
+    type: 'enum',
+    enum: language,
+    default: language.ENGB
+  })
+  @IsNotEmpty()
   @IsString()
-  public language: string;
+  public language: language;
 
   @Column({ length: 11 })
   @IsNumber()
+  @IsOptional()
   public phone: number;
 
   @Column()
+  @IsNotEmpty()
   @IsNumber()
   public zipCode: number;
 }
